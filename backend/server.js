@@ -18,21 +18,30 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // MIDDLEWARE 
+const allowedOrigins = [
+  // Preferred: configure via env for flexibility across deployments
+  process.env.FRONTEND_URL,
+  process.env.ADMIN_URL,
+  // Known production origins
+  "https://foodie-frenzy-frontend-eone.onrender.com",
+  "https://foodie-frenzy-admin.onrender.com",
+  // Local development convenience
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "http://localhost:4173",
+].filter(Boolean);
+
 app.use(
-    cors({
-        origin: (origin, callback) => {
-            const allowedOrigins = [
-              "https://foodie-frenzy-frontend-eone.onrender.com",
-              "https://foodie-frenzy-admin.onrender.com",
-            ];
-            if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true);
-            } else {
-                callback(new Error('Not allowed by CORS'));
-            }
-        },
-        credentials: true,
-    })
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
 );
 
 app.use(express.json());
