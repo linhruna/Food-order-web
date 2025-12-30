@@ -37,6 +37,10 @@ Một ứng dụng web đặt đồ ăn trực tuyến, bao gồm **Frontend (Re
 ## 🔗 Link deploy sản phẩm
 https://fen.onrender.com/
 
+### Tài khoản admin 
+admin@gmail.com
+linhruna
+
 ---
 
 
